@@ -4,7 +4,7 @@ echo Filename?
 read userFileIn
 echo -e "\nNew File (can be the same file name btw)"
 read userFileOut
-echo Will this resization affect the image ratio? \(y\/N\)
+echo Will this resization affect the aspect ratio? \(y\/N\)
 read userChoice
 if [ "$userChoice" = "Y" ] || [ "$userChoice" = "y" ]
 then
