@@ -1,6 +1,7 @@
 # imagemagick-resize-thing
 resize images with imagemagick using a bash script because I'm lazy af
 
+```
 imrt.sh --flag(s) resolution fileIn.jpg fileOut.png
 -s --shift	Resolution breaking image aspect ratio
 		syntax	1920x1080
@@ -10,6 +11,7 @@ imrt.sh --flag(s) resolution fileIn.jpg fileOut.png
 		w width		 input width in resolution
 		h height	 input height in resolution
 		p percentage	 input percentage in resolution(you must include %)
+```
 
 How to use this thing
 - Download it
