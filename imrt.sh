@@ -1,38 +1,31 @@
 #!/bin/bash
 
-echo Filename?
-read userFileIn
-echo -e "\nNew File (can be the same file name btw)"
-read userFileOut
-echo Will this resization affect the aspect ratio? \(y\/N\)
-read userChoice
-if [ "$userChoice" = "Y" ] || [ "$userChoice" = "y" ]
-then
-	echo -e "Put in a value eg.\n1920x1080\n3738x100%"
-	read userChoice
-	convert $userFileIn -compress Lossless -resize $userChoice! $userFileOut
-elif [ "$userChoice" = "N" ] || [ "$userChoice" = "n" ] || [ "$userChoice" = "" ]
-then
-	echo Will you use \(1\)width \(2\)height or \(3\)percentage?
-	read userChoice
-	if [ "$userChoice" = "1" ]
-	then
-		echo Please put in a value \(eg. 1920\)
-		read userChoice
-		convert $userFileIn -compress Lossless -resize $userChoice $userFileOut
-	elif [ "$userChoice" = "2" ]
-	then
-		echo Please put in a value \(eg. 1080\)
-		read userChoice
-		convert $userFileIn -compress Lossless -resize x$userChoice $userFileOut
-	elif [ "$userChoice" = "3" ]
-	then
-		echo Please put in a value \(eg. 50%\)
-		read userChoice
-		convert $userFileIn -compress Lossless -resize $userChoice $userFileOut
-	else
-		echo Please type 1, 2 or 3
-	fi
-else
-	echo Please type y or n
-fi
+while test $# -gt 0
+do
+	case "${1}" in
+		-k|--keep)
+			if [ $2 = w ] || [ $2 = width ]
+			then
+				convert $4 -compress Lossless -resize $3 $5
+			elif [ $2 = h ] || [ $2 = height ]
+			then
+				convert $4 -compress Lossless -resize x$3 $5
+			elif [ $2 = p ] || [ $2 = percentage ]
+			then
+				convert $4 -compress Lossless -resize $3 $5
+			fi
+			echo done
+			exit 0
+			;;
+		-s|--shift)
+			convert $3 -compress Lossless -resize $2! $4
+			echo done
+			exit 0
+			;;
+		-h|--help)
+			echo -e "imrt.sh --flag(s) resolution fileIn.jpg fileOut.png\n-s --shift\tResolution breaking image aspect ratio\n\t\tsyntax\t1920x1080\n\t\t\t3000x100%\n\n-k --keep\tkeep resolution (requires 1 of 3 flags)\n\t\tw width\t\t input width in resolution\n\t\th height\t input height in resolution\n\t\tp percentage\t input percentage in resolution(you must include %)"
+			exit 0
+			;;
+	esac
+done
+echo -e "imrt.sh --flag resolution fileIn.jpg fileOut.png\n-s --shift\tResolution breaking image aspect ratio\n\t\tsyntax\t1920x1080\n\t\t\t3000x100%\n\n-k --keep\tkeep resolution (requires 1 of 3 flags)\n\t\tw width\t\t input width in resolution\n\t\th height\t input height in resolution\n\t\tp percentage\t input percentage in resolution(you must include %)"
