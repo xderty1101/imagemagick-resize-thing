@@ -12,4 +12,4 @@ How to use this thing
 - yes
 
 Dependencies
--ImageMagick
+- ImageMagick
