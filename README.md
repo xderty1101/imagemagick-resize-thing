@@ -26,3 +26,21 @@ How to use this thing
 
 Dependencies
 - ImageMagick
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I have no idea why i made this shit.
